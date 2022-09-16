@@ -7,7 +7,7 @@ class Profil
      * @param string $prenom PRénom du membre
      * @return array|bool
      */
-    public static function getMembreByNomPrenom(string $nom, string $prenom): array | bool
+    public static function getMembreByNomPrenom(string $nom, string $prenom): array|bool
     {
         $sql = <<<EOD
             SELECT login, email
@@ -29,7 +29,12 @@ EOD;
         }
     }
 
-    public static function getMembreByLogin(string $login): array | bool
+    /**
+     * retourne l'id, le login et le nom et prenom et le mdp de l'utilisateur à partir de son login
+     * @param string $login
+     * @return array|bool
+     */
+    public static function getMembreByLogin(string $login): array|bool
     {
         $sql = <<<EOD
             SELECT id, login, nom, prenom, password
@@ -50,9 +55,14 @@ EOD;
         }
     }
 
+    /**
+     * retourne le nom, le téléphone, la photo et l'autorisation d'affiner l'email
+     * @param string $id
+     * @return array|bool
+     */
 
 
-    public static function getMembreById(string $id ): array | bool
+    public static function getMembreById(string $id): array|bool
     {
         $db = Database::getInstance();
         $sql = <<<EOD
@@ -70,13 +80,20 @@ EOD;
 
         } catch (Exception $e) {
 
-            $erreur = "Erreur innattendue, nous recherchons une solution au problème";
             return false;
         }
     }
 
+    /**
+     * retourne le nom, le prenom, la concaténation nom et prenom,
+     * email ou non communiqué si autmail = false
+     * téléphone ou non renseigné si téléphone is null
+     * photo ou non renseignée si photo is null
+     * @return array
+     */
 
-    public static function getLesMembres() : array {
+    public static function getLesMembres(): array
+    {
         $db = Database::getInstance();
         $sql = <<<EOD
             Select nom, prenom, concat(nom, ' ', prenom) as nomPrenom,   
@@ -92,8 +109,16 @@ EOD;
         return $lesLignes;
     }
 
-
-    public static function modifierColonne(string $colonne, string $valeur, int $id, string &$erreur) : bool {
+    /**
+     * sert à modifier la valeur d'une colonne (telephone, photo) d'un enregistrement de la table
+     * @param string $colonne
+     * @param string $valeur
+     * @param int $id
+     * @param string $erreur
+     * @return bool
+     */
+    public static function modifierColonne(string $colonne, string $valeur, int $id, string &$erreur): bool
+    {
         $db = Database::getInstance();
         $ok = true;
         $erreur = "";
@@ -108,13 +133,14 @@ EOD;
         try {
             $curseur->execute();
         } catch (Exception $e) {
-            $erreur = substr($e->getMessage(),strrpos($e->getMessage(), '#') + 1);
+            $erreur = substr($e->getMessage(), strrpos($e->getMessage(), '#') + 1);
             $ok = false;
         }
         return $ok;
     }
 
-    public static function effacerColonne(string $colonne, int $id, string &$erreur) : bool {
+    public static function effacerColonne(string $colonne, int $id, string &$erreur): bool
+    {
         $db = Database::getInstance();
         $ok = true;
         $erreur = "";
@@ -128,13 +154,14 @@ EOD;
         try {
             $curseur->execute();
         } catch (Exception $e) {
-            $erreur = substr($e->getMessage(),strrpos($e->getMessage(), '#') + 1);
+            $erreur = substr($e->getMessage(), strrpos($e->getMessage(), '#') + 1);
             $ok = false;
         }
         return $ok;
     }
 
-    public static function enregistrerTelephone(int $id, string $telephone) : int | string {
+    public static function enregistrerTelephone(int $id, string $telephone): int|string
+    {
         $db = Database::getInstance();
         $sql = <<<EOD
             Update membre 
@@ -148,7 +175,7 @@ EOD;
             $curseur->execute();
             return 1;
         } catch (Exception $e) {
-            return substr($e->getMessage(),strrpos($e->getMessage(), '#') + 1);
+            return substr($e->getMessage(), strrpos($e->getMessage(), '#') + 1);
         }
     }
 }

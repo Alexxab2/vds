@@ -1,4 +1,4 @@
-<?php
+.<?php
 /**
  * ajout ou modification d'un module qui doit subir un contrôle d'accès
  * Appel : administration/script.js
