@@ -6,7 +6,9 @@
  */
 
 require '../include/initialisation.php';
+
 require '../include/controleacces.php';
+
 $titreFonction = "Mise à jour du bandeau des dernières informations";
 require RACINE . '/include/head.php';
 ?>

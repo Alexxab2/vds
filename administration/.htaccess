@@ -1,2 +1,5 @@
-
+AuthType Basic
+AuthUserFile "j:/vds/.htpasswd"
+AuthName "Administration"
+Require valid-user
 

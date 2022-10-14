@@ -19,7 +19,7 @@ class Database
             } else {
                 $dbHost = 'mysql-alexandre.alwaysdata.net';
                 $dbUser = 'alexandre';
-                $dbPassword = 'datavds2022*';
+                $dbPassword = 'SlamSR.2023';
                 $dbBase = 'alexandre_vds';
                 $dbPort = '3306';
             }

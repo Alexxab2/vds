@@ -75,6 +75,9 @@ require RACINE . '/include/head.php';
         <a class="btn btn-sm btn-outline-dark m-2 shadow-sm " href="/page/formation.php">
             Formation
         </a>
+        <a class="btn btn-sm btn-outline-dark m-2 shadow-sm " href="/resultatffa/consultation.php">
+            Résultats sportifs
+        </a>
         <div class="marquee-rtl">
             <div id='detailBandeau' class=" article fst-italic"></div>
         </div>
